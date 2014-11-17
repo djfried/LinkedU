@@ -31,7 +31,7 @@ public class ProfileDAOImpl implements ProfileDAO{
             String myDB = "jdbc:derby://localhost:1527/linkedu";
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
             
-            String insertSQL="INSERT INTO Profile.Users"
+            String insertSQL="INSERT INTO linkedu.Users"
                     +"(FIRSTNAME, LASTNAME, EMAIL, PASSWORD) VALUES"
                     +"(?,?,?,?)";
           PreparedStatement ps=DBConn.prepareStatement(insertSQL);
