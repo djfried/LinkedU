@@ -6,7 +6,6 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
-
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
                 <div class="container">
@@ -14,36 +13,23 @@
                         <h:form class="form-inline">
                             <h1>Sign Up for LinkedU</h1><br/>
                             <div class="form-group">
-                                <h:inputText p:placeHolder="First Name" id="fname" class="form-control"/>
+                                <h:inputText p:placeHolder="First Name" value="#{profileController.theModel.firstName}"
+                                             id="fname" class="form-control"/>
                             </div>
                             <div class="form-group">
-                                <h:inputText p:placeHolder="Last Name" id="lname" class="form-control"/>
+                                <h:inputText p:placeHolder="Last Name" value="#{profileController.theModel.lastName}"
+                                             id="lname" class="form-control"/>
                             </div><br/><br/>
+
                             <div class="form-group">
-                                <h:inputText p:placeHolder="Address" id="address" class="form-control"/>
+                                <h:inputText p:placeHolder="Email"  value="#{profileController.theModel.email}"
+                                             id="email" class="form-control"/>
                             </div>
                             <div class="form-group">
-                                <h:inputText p:placeHolder="City" id="city" class="form-control"/>
-                            </div><br/><br/>
-                            <div class="form-group">
-                                <h:inputText p:placeHolder="State" id="state" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <h:inputText p:placeHolder="Zip Code" id="zip" class="form-control"/>
-                            </div><br/><br/>
-                            <div class="form-group">
-                                <h:inputText p:placeHolder="Email" id="email" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <h:inputText p:placeHolder="Confirm Email" id="confirmEmail" class="form-control"/>
-                            </div><br/><br/>
-                            <div class="form-group">
-                                <h:inputSecret p:placeHolder="Password" id="password" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <h:inputSecret p:placeHolder="Confirm Password" id="confirmPassword" class="form-control"/>
+                                <h:inputSecret p:placeHolder="Password" value="#{profileController.theModel.password}"
+                                               id="password" class="form-control"/>
                             </div><br/>
-                            <h:commandButton id="loginButton" value="Create Account" class="btn btn-success"></h:commandButton>  
+                            <h:commandButton id="loginButton" value="Create Account" class="btn btn-primary" action="#{profileController.createProfile()}"></h:commandButton>  
 
                         </h:form>
                     </div>
