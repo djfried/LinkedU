@@ -12,7 +12,20 @@
 
             <ui:define name="login">
                 <h:form class="navbar-form navbar-right">
-                    <h:commandButton class="btn btn-success" value="Sign Out" action="#{profileController.logout()}"/>
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Options<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Delete Account" role="menuitem" action="#{profileController.deleteAccount()}"/></a>
+                            </li>  
+                        </ul>
+
+                    </div>
                 </h:form>
             </ui:define>
 
@@ -31,17 +44,17 @@
 
                                     Search For A University<br/>
                                     <a href="universitySearch.xhtml">
-                                    <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px" >
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                    </button><br/><br/>
+                                        <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px" >
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button><br/><br/>
                                     </a>
-                                    
-                                    
+
+
                                     Search For Other Students<br/>
                                     <a href="studentSearch.xhtml">
-                                    <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px">
-                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                    </button><br/>
+                                        <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px">
+                                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        </button><br/>
                                     </a>
 
                                 </div>

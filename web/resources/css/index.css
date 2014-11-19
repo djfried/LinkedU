@@ -9,6 +9,6 @@ and open the template in the editor.
 */
 body { 
     background-image:url("#{resource['images:College.jpeg']}"); 
-    background-size:100%;
-    
+    background-repeat: no-repeat;
+    background-size: 100%;
 }

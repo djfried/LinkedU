@@ -133,5 +133,28 @@ public class ProfileDAOImpl implements ProfileDAO{
     public ProfileBean findByName(String aName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void delete(ProfileBean theModel) {
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+
+        
+        try {
+            String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+             //System.out.println("HELLOOOOOOOOOOOOO222");
+            Statement statement = DBConn.createStatement();
+            String statementString = "Delete From linkedU.users Where email='"+theModel.getLoginEmail()+"'";
+            statement.executeUpdate(statementString);
+            DBConn.close();
+        }   catch (SQLException ex) {
+            //Logger.getLogger(LogInImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

@@ -18,4 +18,6 @@ public interface ProfileDAO {
     public ProfileBean findByName(String aName); 
     public boolean login(ProfileBean theModel);
     public ArrayList<ProfileBean> searchStudents();
+
+    public void delete(ProfileBean theModel);
 }

@@ -75,6 +75,13 @@ public class ProfileController implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index.xhtml?faces-redirect=true";
     }
+    public String deleteAccount()
+    {
+        ProfileDAO aProfileDAO = new ProfileDAOImpl();
+        aProfileDAO.delete(theModel);
+        System.out.println("DELETED");
+        return this.logout();
+    }
     public String searchForUniversity(){
     
         return "universitySearch.xhtml";
@@ -88,6 +95,9 @@ public class ProfileController implements Serializable {
     public ArrayList<ProfileBean> getStudentResults(){
             return studentResults;
     }
-
-
+    public String viewProfile()
+    {
+        String response="profile.xhtml?faces-redirect=true";
+        return response;
+    }
 }

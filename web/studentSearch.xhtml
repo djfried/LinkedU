@@ -18,7 +18,20 @@
 
             <ui:define name="login">
                 <h:form class="navbar-form navbar-right">
-                    <h:commandButton class="btn btn-success" value="Sign Out" action="#{profileController.logout()}" />
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Options<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Delete Account" role="menuitem" action="#{profileController.deleteAccount()}"/></a>
+                            </li>  
+                        </ul>
+
+                    </div>
                 </h:form>
             </ui:define>
 
@@ -40,18 +53,18 @@
                                     <h:dataTable class="table table-hover" value="#{profileController.getStudentResults()}" var="s">
                                         <h:column>
                                             <f:facet name="header">First Name</f:facet>
-                                            #{s.firstName}
+                                                #{s.firstName}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Last Name</f:facet>
-                                            #{s.lastName}
+                                                #{s.lastName}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Email Address</f:facet>
-                                            #{s.email}
+                                                #{s.email}
                                         </h:column>
                                         <h:column>
-                                            <h:commandButton class="btn btn-primary" value="View Profile" action="profile.xhtml"/>
+                                            <h:button class="btn btn-primary" value="View Profile" outcome="#{profileController.viewProfile()}"/>
                                         </h:column>
                                     </h:dataTable>
 
