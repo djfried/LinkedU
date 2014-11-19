@@ -43,10 +43,10 @@ and open the template in the editor.
                         <ui:insert name="login">
                             <h:form class="navbar-form navbar-right">
                                 <div class="form-group">
-                                    <h:inputText p:placeHolder="Email" class="form-control">Email</h:inputText>
+                                    <h:inputText p:placeHolder="Email" value="#{profileController.theModel.loginEmail}" class="form-control">Email</h:inputText>
                                 </div>
                                 <div class="form-group">
-                                    <h:inputSecret p:placeHolder="Password"  class="form-control"/>
+                                    <h:inputSecret p:placeHolder="Password"  value="#{profileController.theModel.loginPassword}" class="form-control"/>
                                 </div>    
                                 <h:commandButton class="btn btn-success" value="Sign In" action="#{profileController.login()}"/>
                             </h:form>

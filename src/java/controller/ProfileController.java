@@ -47,7 +47,7 @@ public class ProfileController implements Serializable {
         int rowCount = aProfileDAO.createProfile(theModel);  // Doing anything with the object after this?
 
         if (rowCount == 1) {
-            return "response.xhtml"; // navigate to "response.xhtml"
+            return "home.xhtml"; // navigate to "response.xhtml"
         } else {
             return "error.xhml";
         }
@@ -56,6 +56,10 @@ public class ProfileController implements Serializable {
         
        ProfileDAO aProfileDAO = new ProfileDAOImpl();
        boolean good = aProfileDAO.login(theModel);
+       System.out.println("login email is "+ theModel.getLoginEmail());
+       System.out.println("login password"+ theModel.getLoginPassword());
+       System.out.println("result "+good);
+
        if(good ){
            userEmail = theModel.getEmail();
            return "home.xhtml";
@@ -63,4 +67,22 @@ public class ProfileController implements Serializable {
         
         return "";
     }
+    
+    public String logout(){return "";}
+    public String searchForUniversity(){
+    
+        return "universitySearch.xhtml";
+    }
+    String studentResults ="";
+    public void populateStudentSearch(){
+    
+        ProfileDAO aProfileDAO = new ProfileDAOImpl();
+        studentResults = aProfileDAO.searchStudents();
+          
+    } 
+    public String getStudentResults(){
+            return studentResults;
+    }
+
+
 }

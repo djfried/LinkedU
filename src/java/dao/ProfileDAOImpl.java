@@ -57,10 +57,43 @@ public class ProfileDAOImpl implements ProfileDAO{
     }
 
     @Override
-    public boolean login(ProfileBean theModel){
-        return true;
+    public String searchStudents(){
+        String answer ="<table>";
+             try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+
         
-        /*
+        try {
+            String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB;create=true";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+             //System.out.println("HELLOOOOOOOOOOOOO222");
+            Statement statement = DBConn.createStatement();
+            String statementString = "Select * From linkedU.users";
+            ResultSet rs= statement.executeQuery(statementString);
+            
+            while(rs.next()){
+                answer+="<tr  height=\"100\"><td>"+rs.getString("FIRSTNAME")+"</td>";
+                answer+="<td>"+rs.getString("LASTNAME")+"</td>";
+                answer+="<td>"+rs.getString("EMAIL")+"</td>";
+                answer+="<td width=\"100\"><h:commandButton class=\"btn btn-success\" value=\"Sign Out\" action=\"#{profileController.logout()}\" style=\"font-size: 50px\"/></td></tr>";
+            }
+            answer+="</table>";
+            DBConn.close();
+        }   catch (SQLException ex) {
+            //Logger.getLogger(LogInImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return answer;
+    }
+    
+    @Override
+    public boolean login(ProfileBean theModel){
+   
+         System.out.println("HELLOOOOOOOOOOOOO11111");
+        
          try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException e) {
@@ -70,14 +103,15 @@ public class ProfileDAOImpl implements ProfileDAO{
 
         
         try {
-            String myDB = "jdbc:derby://localhost:1527/Project353";
+            String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB;create=true";
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+             //System.out.println("HELLOOOOOOOOOOOOO222");
             Statement statement = DBConn.createStatement();
-            String statementString = "Select * From Project353.LoginInfo Where email='"+theModel.getEmail()+"'";
+            String statementString = "Select * From linkedU.users Where email='"+theModel.getLoginEmail()+"'";
             ResultSet rs= statement.executeQuery(statementString);
             if(rs.next()){
-                System.out.println(rs.getString(2));
-                if(rs.getString(2).equals(theModel.getPassword())){
+              //  System.out.println("HELLOOOOOOOOOOOOO");
+                if(rs.getString(2).equals(theModel.getLoginPassword())){
                     return true;
                 }
             }
@@ -86,7 +120,7 @@ public class ProfileDAOImpl implements ProfileDAO{
             //Logger.getLogger(LogInImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-        */
+        
     }
     
     @Override

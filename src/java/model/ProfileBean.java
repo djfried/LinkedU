@@ -14,6 +14,8 @@ public class ProfileBean {
     private String lastName;
     private String email;
     private String password;
+    private String loginEmail;
+    private String loginPassword;
 
     public String getFirstName() {
         return firstName;
@@ -45,6 +47,34 @@ public class ProfileBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the loginEmail
+     */
+    public String getLoginEmail() {
+        return loginEmail;
+    }
+
+    /**
+     * @param loginEmail the loginEmail to set
+     */
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
+    }
+
+    /**
+     * @return the loginPassword
+     */
+    public String getLoginPassword() {
+        return loginPassword;
+    }
+
+    /**
+     * @param loginPassword the loginPassword to set
+     */
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
     }
     
 }

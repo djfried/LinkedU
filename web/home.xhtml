@@ -7,30 +7,45 @@
 
     <body>
         <ui:composition template="./template.xhtml">
+
+
+
+            <ui:define name="login">
+                <h:form class="navbar-form navbar-right">
+                    <h:commandButton class="btn btn-success" value="Sign Out" action="#{profileController.logout()}"/>
+                </h:form>
+            </ui:define>
+
+
             <ui:define name="content">
                 <div class="container">
-                    <div class="starter-template" style="padding: 50px 15px; text-align: center">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px ">
                         <h:form class="form-inline">
-                            <h1>Welcome</h1><br/>
-                            <div class="form-group">
-                                <h:inputText p:placeHolder="First Name" value="#{profileController.theModel.firstName}"
-                                             id="fname" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <h:inputText p:placeHolder="Last Name" value="#{profileController.theModel.lastName}"
-                                             id="lname" class="form-control"/>
-                            </div><br/><br/>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
 
-                            <div class="form-group">
-                                <h:inputText p:placeHolder="Email"  value="#{profileController.theModel.email}"
-                                             id="email" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <h:inputSecret p:placeHolder="Password" value="#{profileController.theModel.password}"
-                                               id="password" class="form-control"/>
-                            </div><br/>
-                            <h:commandButton id="loginButton" value="Create Account" class="btn btn-primary" action="#{profileController.createProfile()}"></h:commandButton>  
+                                    Edit Profile <br/>
+                                    <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px">
+                                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                    </button><br/><br/>
 
+                                    Search For A University<br/>
+                                    <a href="universitySearch.xhtml">
+                                    <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px" >
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button><br/><br/>
+                                    </a>
+                                    
+                                    
+                                    Search For Other Students<br/>
+                                    <a href="studentSearch.xhtml">
+                                    <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px">
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    </button><br/>
+                                    </a>
+
+                                </div>
+                            </div>
                         </h:form>
                     </div>
                 </div>
