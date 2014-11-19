@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">
+                <div class="container">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: center">
+                        <h:form class="form-inline">
+                            <h1>Welcome</h1><br/>
+                            <div class="form-group">
+                                <h:inputText p:placeHolder="First Name" value="#{profileController.theModel.firstName}"
+                                             id="fname" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <h:inputText p:placeHolder="Last Name" value="#{profileController.theModel.lastName}"
+                                             id="lname" class="form-control"/>
+                            </div><br/><br/>
+
+                            <div class="form-group">
+                                <h:inputText p:placeHolder="Email"  value="#{profileController.theModel.email}"
+                                             id="email" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <h:inputSecret p:placeHolder="Password" value="#{profileController.theModel.password}"
+                                               id="password" class="form-control"/>
+                            </div><br/>
+                            <h:commandButton id="loginButton" value="Create Account" class="btn btn-primary" action="#{profileController.createProfile()}"></h:commandButton>  
+
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

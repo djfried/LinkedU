@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>LinkedU</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <!-- Bootstrap core JavaScript
  ================================================== -->
@@ -48,7 +48,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <h:inputSecret p:placeHolder="Password"  class="form-control"/>
                                 </div>    
-                                <h:commandButton class="btn btn-success" value="Sign In"/>
+                                <h:commandButton class="btn btn-success" value="Sign In" action="#{profileController.login()}"/>
                             </h:form>
                         </ui:insert>
                     </div>

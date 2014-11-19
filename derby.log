@@ -1,7 +1,7 @@
-Mon Nov 17 12:50:19 CST 2014 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
+Tue Nov 18 15:27:01 CST 2014 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Nov 17 12:50:20 CST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0149-bf17-5bbe-00000bf9506f 
+Tue Nov 18 17:06:00 CST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0149-c4cd-2f51-00000bf9506f 
 on database directory H:\Project\LinkedU\LinkedU  with class loader sun.misc.Launcher$AppClassLoader@107077e 
 Loaded from file:/C:/java/jdk7/db/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -10,67 +10,8 @@ user.dir=C:\java\jdk7\db
 derby.system.home=H:\Project\LinkedU
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Mon Nov 17 12:50:25 CST 2014:
-Shutting down instance a816c00e-0149-bf17-5bbe-00000bf9506f on database directory H:\Project\LinkedU\LinkedU with class loader sun.misc.Launcher$AppClassLoader@107077e 
-Mon Nov 17 12:50:25 CST 2014 Thread[DRDAConnThread_3,5,main] (DATABASE = LinkedU), (DRDAID = {2}), Database 'LinkedU' shutdown.
+Tue Nov 18 17:21:10 CST 2014: Shutting down Derby engine
 ----------------------------------------------------------------
-Mon Nov 17 12:50:29 CST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance 6c44409f-0149-bf17-5bbe-00000bf9506f 
-on database directory H:\Project\LinkedU\LinkedU  with class loader sun.misc.Launcher$AppClassLoader@107077e 
-Loaded from file:/C:/java/jdk7/db/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_25-b17
-user.dir=C:\java\jdk7\db
-derby.system.home=H:\Project\LinkedU
-Database Class Loader started - derby.database.classpath=''
-Mon Nov 17 12:55:33 CST 2014 Thread[DRDAConnThread_4,5,main] Cleanup action starting
-java.sql.SQLException: Database 'Profile' not found.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
-	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Caused by: java.sql.SQLException: Database 'Profile' not found.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 19 more
-============= begin nested exception, level (1) ===========
-java.sql.SQLException: Database 'Profile' not found.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
-	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-============= end nested exception, level (1) ===========
-Cleanup action completed
-Mon Nov 17 12:55:33 CST 2014 Thread[DRDAConnThread_4,5,main] (DATABASE = Profile), (DRDAID = {4}), Database 'Profile' not found.
+Tue Nov 18 17:21:10 CST 2014:
+Shutting down instance a816c00e-0149-c4cd-2f51-00000bf9506f on database directory H:\Project\LinkedU\LinkedU with class loader sun.misc.Launcher$AppClassLoader@107077e 
+----------------------------------------------------------------

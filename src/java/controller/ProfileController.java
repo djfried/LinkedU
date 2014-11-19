@@ -9,6 +9,10 @@ import dao.ProfileDAOImpl;
 import dao.ProfileDAO;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import model.ProfileBean;
 
@@ -19,7 +23,9 @@ import model.ProfileBean;
 @ManagedBean
 @SessionScoped
 public class ProfileController implements Serializable {
-
+    
+    String userEmail="";
+    
     private ProfileBean theModel;
 
     /**
@@ -46,5 +52,15 @@ public class ProfileController implements Serializable {
             return "error.xhml";
         }
     }
-
+    public String login(){
+        
+       ProfileDAO aProfileDAO = new ProfileDAOImpl();
+       boolean good = aProfileDAO.login(theModel);
+       if(good ){
+           userEmail = theModel.getEmail();
+           return "home.xhtml";
+       }
+        
+        return "";
+    }
 }

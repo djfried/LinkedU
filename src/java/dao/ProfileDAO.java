@@ -15,5 +15,6 @@ public interface ProfileDAO {
     public int createProfile(ProfileBean aProfile);
     public ProfileBean[] findAll();
     public ProfileBean findByName(String aName); 
+    public boolean login(ProfileBean theModel);
     
 }
