@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import model.ProfileBean;
 
 /**
@@ -57,7 +58,7 @@ public class ProfileController implements Serializable {
        ProfileDAO aProfileDAO = new ProfileDAOImpl();
        boolean good = aProfileDAO.login(theModel);
        System.out.println("login email is "+ theModel.getLoginEmail());
-       System.out.println("login password"+ theModel.getLoginPassword());
+       System.out.println("login password "+ theModel.getLoginPassword());
        System.out.println("result "+good);
 
        if(good ){
@@ -68,7 +69,11 @@ public class ProfileController implements Serializable {
         return "";
     }
     
-    public String logout(){return "";}
+    public String logout()
+    {   
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index.xhtml?faces-redirect=true";
+    }
     public String searchForUniversity(){
     
         return "universitySearch.xhtml";
