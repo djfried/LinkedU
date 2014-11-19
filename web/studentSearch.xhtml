@@ -5,10 +5,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core">
-    
+
 
     <body>
-        
+
         <f:metadata>
             <f:event type ="preRenderView" listener="#{profileController.populateStudentSearch()}"/>
         </f:metadata>
@@ -30,13 +30,30 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
 
-                                       
-                                    <h:form>
-                                        
-                                        <h:outputText id="searchResult" escape="false" value="#{profileController.getStudentResults()}"/>
-                                        
-                                        
-                                    </h:form>
+
+                                    <!--                                    <h:form>
+                                                                            
+                                                                            <h:outputText id="searchResult" escape="false" value="#{profileController.getStudentResults()}"/>
+                                                                            
+                                                                            
+                                                                        </h:form>-->
+                                    <h:dataTable class="table table-hover" value="#{profileController.getStudentResults()}" var="s">
+                                        <h:column>
+                                            <f:facet name="header">First Name</f:facet>
+                                            #{s.firstName}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Last Name</f:facet>
+                                            #{s.lastName}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Email Address</f:facet>
+                                            #{s.email}
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandButton class="btn btn-primary" value="View Profile" action="profile.xhtml"/>
+                                        </h:column>
+                                    </h:dataTable>
 
                                 </div>
                             </div>

@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import model.ProfileBean;
@@ -26,7 +27,7 @@ import model.ProfileBean;
 public class ProfileController implements Serializable {
     
     String userEmail="";
-    
+    private ArrayList<ProfileBean> studentResults=new ArrayList<ProfileBean>(); 
     private ProfileBean theModel;
 
     /**
@@ -78,14 +79,13 @@ public class ProfileController implements Serializable {
     
         return "universitySearch.xhtml";
     }
-    String studentResults ="";
+   
     public void populateStudentSearch(){
     
         ProfileDAO aProfileDAO = new ProfileDAOImpl();
         studentResults = aProfileDAO.searchStudents();
-          
     } 
-    public String getStudentResults(){
+    public ArrayList<ProfileBean> getStudentResults(){
             return studentResults;
     }
 

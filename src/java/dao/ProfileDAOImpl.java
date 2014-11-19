@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.ProfileBean;
@@ -57,8 +58,9 @@ public class ProfileDAOImpl implements ProfileDAO{
     }
 
     @Override
-    public String searchStudents(){
-        String answer ="<table>";
+    public ArrayList<ProfileBean> searchStudents(){
+//        String answer ="<table>";
+          ArrayList<ProfileBean> answer= new ArrayList<ProfileBean>();
              try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException e) {
@@ -74,14 +76,18 @@ public class ProfileDAOImpl implements ProfileDAO{
             Statement statement = DBConn.createStatement();
             String statementString = "Select * From linkedU.users";
             ResultSet rs= statement.executeQuery(statementString);
-            
+             
             while(rs.next()){
-                answer+="<tr  height=\"100\"><td>"+rs.getString("FIRSTNAME")+"</td>";
-                answer+="<td>"+rs.getString("LASTNAME")+"</td>";
-                answer+="<td>"+rs.getString("EMAIL")+"</td>";
-                answer+="<td width=\"100\"><h:commandButton class=\"btn btn-success\" value=\"Sign Out\" action=\"#{profileController.logout()}\" style=\"font-size: 50px\"/></td></tr>";
-            }
-            answer+="</table>";
+//                answer+="<tr  height=\"100\"><td>"+rs.getString("FIRSTNAME")+"</td>";
+//                answer+="<td>"+rs.getString("LASTNAME")+"</td>";
+//                answer+="<td>"+rs.getString("EMAIL")+"</td>";
+////                answer+="<td width=\"100\"><h:commandButton class=\"btn btn-success\" value=\"Sign Out\" action=\"#{profileController.logout()}\" style=\"font-size: 50px\"/></td></tr>";
+//                answer+="<td width=\"100\"><button class=\"btn btn-success\">button</button></td></tr>";
+//            }
+//            answer+="</table>";
+              answer.add(new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),
+              rs.getString("EMAIL")));
+           }
             DBConn.close();
         }   catch (SQLException ex) {
             //Logger.getLogger(LogInImpl.class.getName()).log(Level.SEVERE, null, ex);

@@ -17,6 +17,15 @@ public class ProfileBean {
     private String loginEmail;
     private String loginPassword;
 
+    public ProfileBean(String fname, String lname, String em) {
+        firstName=fname;
+        lastName=lname;
+        email=em;
+    }
+    public ProfileBean()
+    {
+     
+    }
     public String getFirstName() {
         return firstName;
     }
