@@ -7,7 +7,7 @@ package controller;
 
 import dao.ProfileDAOImpl;
 import dao.ProfileDAO;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
