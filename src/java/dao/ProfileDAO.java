@@ -16,8 +16,8 @@ public interface ProfileDAO {
     public int createProfile(ProfileBean aProfile);
     public ProfileBean[] findAll();
     public ProfileBean findByName(String aName); 
-    public boolean login(ProfileBean theModel);
-    public ArrayList<ProfileBean> searchStudents();
+    public ProfileBean login(ProfileBean theModel);
+    public ArrayList<ProfileBean> searchStudents(ProfileBean theModel);
 
     public void delete(ProfileBean theModel);
 }

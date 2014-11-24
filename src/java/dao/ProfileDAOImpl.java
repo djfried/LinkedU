@@ -58,8 +58,9 @@ public class ProfileDAOImpl implements ProfileDAO{
     }
 
     @Override
-    public ArrayList<ProfileBean> searchStudents(){
+    public ArrayList<ProfileBean> searchStudents(ProfileBean theModel){
 //        String answer ="<table>";
+        System.out.println("searching from the "+theModel.getFirstName());
           ArrayList<ProfileBean> answer= new ArrayList<ProfileBean>();
              try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -74,7 +75,7 @@ public class ProfileDAOImpl implements ProfileDAO{
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
              //System.out.println("HELLOOOOOOOOOOOOO222");
             Statement statement = DBConn.createStatement();
-            String statementString = "Select * From linkedU.users";
+            String statementString = "Select * From linkedU.users order by lastname";
             ResultSet rs= statement.executeQuery(statementString);
              
             while(rs.next()){
@@ -85,7 +86,10 @@ public class ProfileDAOImpl implements ProfileDAO{
 //                answer+="<td width=\"100\"><button class=\"btn btn-success\">button</button></td></tr>";
 //            }
 //            answer+="</table>";
-              answer.add(new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),
+               String testName = rs.getString("FIRSTNAME");
+               System.out.println("testname "+testName);
+               System.out.println("modelname "+theModel.getFirstName());
+              if( !testName.equals(theModel.getFirstName()) ) answer.add(new ProfileBean(testName,rs.getString("LASTNAME"),
               rs.getString("EMAIL")));
            }
             DBConn.close();
@@ -96,7 +100,7 @@ public class ProfileDAOImpl implements ProfileDAO{
     }
     
     @Override
-    public boolean login(ProfileBean theModel){
+    public ProfileBean login(ProfileBean theModel){
    
          System.out.println("HELLOOOOOOOOOOOOO11111");
         
@@ -117,15 +121,13 @@ public class ProfileDAOImpl implements ProfileDAO{
             ResultSet rs= statement.executeQuery(statementString);
             if(rs.next()){
               //  System.out.println("HELLOOOOOOOOOOOOO");
-                if(rs.getString(2).equals(theModel.getLoginPassword())){
-                    return true;
-                }
+                return new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"));
             }
             DBConn.close();
         }   catch (SQLException ex) {
             //Logger.getLogger(LogInImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return null;
         
     }
     

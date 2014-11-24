@@ -57,12 +57,17 @@ public class ProfileController implements Serializable {
     public String login(){
         
        ProfileDAO aProfileDAO = new ProfileDAOImpl();
-       boolean good = aProfileDAO.login(theModel);
+      ProfileBean tempBean = aProfileDAO.login(theModel);
        System.out.println("login email is "+ theModel.getLoginEmail());
        System.out.println("login password "+ theModel.getLoginPassword());
-       System.out.println("result "+good);
+       //System.out.println("result "+good);
 
-       if(good ){
+       if(tempBean!=null ){
+           theModel.setEmail(tempBean.getEmail());
+           theModel.setPassword(tempBean.getPassword());
+           theModel.setFirstName(tempBean.getFirstName());
+           theModel.setLastName(tempBean.getLastName());
+           System.out.println("login model first name is "+theModel.getFirstName());
            userEmail = theModel.getEmail();
            return "home.xhtml";
        }
@@ -90,7 +95,7 @@ public class ProfileController implements Serializable {
     public void populateStudentSearch(){
     
         ProfileDAO aProfileDAO = new ProfileDAOImpl();
-        studentResults = aProfileDAO.searchStudents();
+        studentResults = aProfileDAO.searchStudents(theModel);
     } 
     public ArrayList<ProfileBean> getStudentResults(){
             return studentResults;

@@ -22,6 +22,12 @@ public class ProfileBean {
         lastName=lname;
         email=em;
     }
+        public ProfileBean(String fname, String lname, String em,String pw) {
+        firstName=fname;
+        lastName=lname;
+        email=em;
+        password=pw;
+    }
     public ProfileBean()
     {
      

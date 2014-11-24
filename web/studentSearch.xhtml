@@ -38,8 +38,26 @@
 
             <ui:define name="content">
                 <div class="container">
-                    <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px ">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px">
                         <h:form class="form-inline">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h:inputText p:placeHolder="Search For ..." value=""
+                                                 id="seachName" class="form-control"/>
+                                    <h:inputText p:placeHolder="Min GPA" value=""
+                                                 id="gpa" class="form-control"/> 
+                                    <h:inputText p:placeHolder="Near Zip Code ..." value=""
+                                                 id="areaCode" class="form-control"/> <br/>
+                                    <div style ="width:50%; margin: 0 auto">
+                                    <h:selectManyCheckbox id="activitiesID" value="" style="font-size: 15px; text-align: center">
+                                        <f:selectItem id="itemSports"  itemLabel="Sports" itemValue="Sports"/>
+                                       <f:selectItem id="itemMusic" itemLabel="Music" itemValue="Music" />
+                                        <f:selectItem id="itemWork" itemLabel="Work Experience" itemValue="Work Experience" />
+                                         <f:selectItem id="itemOther" itemLabel="Other Special Traits" itemValue="Other Special Traits" />
+                                    </h:selectManyCheckbox><br/>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
 
@@ -50,7 +68,7 @@
                                                                             
                                                                             
                                                                         </h:form>-->
-                                    <h:dataTable class="table table-hover" value="#{profileController.getStudentResults()}" var="s">
+                                    <h:dataTable id="studentTable" class="table table-hover" value="#{profileController.getStudentResults()}" var="s">
                                         <h:column>
                                             <f:facet name="header">First Name</f:facet>
                                                 #{s.firstName}
