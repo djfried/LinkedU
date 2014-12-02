@@ -36,7 +36,7 @@ public class ProfileController implements Serializable {
     public ProfileController() {
         theModel = new ProfileBean();
     }
-        public ProfileBean getTheModel() {
+    public ProfileBean getTheModel() {
         return theModel;
     }
 
@@ -46,6 +46,7 @@ public class ProfileController implements Serializable {
 
     public String createProfile() {
         ProfileDAO aProfileDAO = new ProfileDAOImpl();
+        theModel.setEmail(theModel.getEmail().toLowerCase());
         int rowCount = aProfileDAO.createProfile(theModel);  // Doing anything with the object after this?
 
         if (rowCount == 1) {
@@ -57,12 +58,12 @@ public class ProfileController implements Serializable {
     public String login(){
         
        ProfileDAO aProfileDAO = new ProfileDAOImpl();
-      ProfileBean tempBean = aProfileDAO.login(theModel);
-       System.out.println("login email is "+ theModel.getLoginEmail());
-       System.out.println("login password "+ theModel.getLoginPassword());
-       //System.out.println("result "+good);
+       theModel.setLoginEmail(theModel.getLoginEmail().toLowerCase());
+       ProfileBean tempBean = aProfileDAO.login(theModel);
+      System.out.println("AFTER DAO!!!!!!!!!");
 
        if(tempBean!=null ){
+           System.out.println(tempBean.getEmail());
            theModel.setEmail(tempBean.getEmail());
            theModel.setPassword(tempBean.getPassword());
            theModel.setFirstName(tempBean.getFirstName());

@@ -116,12 +116,18 @@ public class ProfileDAOImpl implements ProfileDAO{
             String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB;create=true";
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
              //System.out.println("HELLOOOOOOOOOOOOO222");
-            Statement statement = DBConn.createStatement();
+            
             String statementString = "Select * From linkedU.users Where email='"+theModel.getLoginEmail()+"'";
-            ResultSet rs= statement.executeQuery(statementString);
+            System.out.print(statementString);
+            PreparedStatement ps = DBConn.prepareStatement(statementString);
+            ResultSet rs= ps.executeQuery();
             if(rs.next()){
-              //  System.out.println("HELLOOOOOOOOOOOOO");
-                return new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"));
+                ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"));
+                System.out.println("The Return bean is: " + returnBean.getFirstName());
+                return returnBean;
+            }
+            else{
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!1USER NOT FOUND");
             }
             DBConn.close();
         }   catch (SQLException ex) {
