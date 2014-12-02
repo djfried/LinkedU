@@ -30,6 +30,9 @@
                                                id="password" class="form-control"/><br/>
                             </div><br/>
                             <h:commandButton id="loginButton" value="Create Account" class="btn btn-primary" action="#{profileController.createProfile()}"></h:commandButton>  <br/>
+                            <div class="error">
+                            <h:outputText value="#{profileController.getSignUpStatus()}"/><br/>
+                            </div>
                             <a>University? Sign Up Here</a>
                             
                         </h:form>
