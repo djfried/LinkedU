@@ -48,7 +48,10 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <h:inputSecret p:placeHolder="Password"  value="#{profileController.theModel.loginPassword}" class="form-control"/>
                                 </div>    
-                                <h:commandButton class="btn btn-success" value="Sign In" action="#{profileController.login()}"/>
+                                <h:commandButton class="btn btn-success" value="Sign In" action="#{profileController.login()}" />
+                                <div class="error">
+                                <h:outputText value="#{profileController.getStatus()}"/>
+                                </div>
                             </h:form>
                         </ui:insert>
                     </div>

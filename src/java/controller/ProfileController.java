@@ -14,8 +14,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import model.ProfileBean;
 
 /**
@@ -27,6 +30,8 @@ import model.ProfileBean;
 public class ProfileController implements Serializable {
     
     String userEmail="";
+    private String status ="";
+    private String signUpStatus="";
     private ArrayList<ProfileBean> studentResults=new ArrayList<ProfileBean>(); 
     private ProfileBean theModel;
 
@@ -52,7 +57,8 @@ public class ProfileController implements Serializable {
         if (rowCount == 1) {
             return "home.xhtml"; // navigate to "response.xhtml"
         } else {
-            return "error.xhml";
+            signUpStatus = "Email address already exist!";
+            return "";
         }
     }
     public String login(){
@@ -71,6 +77,8 @@ public class ProfileController implements Serializable {
            System.out.println("login model first name is "+theModel.getFirstName());
            userEmail = theModel.getEmail();
            return "home.xhtml";
+       }else{
+           status = "Login Failed";
        }
         
         return "";
@@ -106,4 +114,33 @@ public class ProfileController implements Serializable {
         String response="profile.xhtml?faces-redirect=true";
         return response;
     }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the signUpStatus
+     */
+    public String getSignUpStatus() {
+        return signUpStatus;
+    }
+
+    /**
+     * @param signUpStatus the signUpStatus to set
+     */
+    public void setSignUpStatus(String signUpStatus) {
+        this.signUpStatus = signUpStatus;
+    }
+    
 }

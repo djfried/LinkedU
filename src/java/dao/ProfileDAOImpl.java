@@ -122,9 +122,10 @@ public class ProfileDAOImpl implements ProfileDAO{
             PreparedStatement ps = DBConn.prepareStatement(statementString);
             ResultSet rs= ps.executeQuery();
             if(rs.next()){
-                ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"));
-                System.out.println("The Return bean is: " + returnBean.getFirstName());
-                return returnBean;
+                if(theModel.getLoginPassword().equals(rs.getString("PASSWORD"))){
+                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"));
+                    return returnBean;
+                }
             }
             else{
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!1USER NOT FOUND");
