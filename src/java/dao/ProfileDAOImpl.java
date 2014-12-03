@@ -53,6 +53,36 @@ public class ProfileDAOImpl implements ProfileDAO{
     }
 
     @Override
+    public boolean save(ProfileBean theModel){
+    
+        
+                int rowCount = 0;
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+        try {
+            String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB;create=true";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+            
+            String insertSQL="UPDATE linkedu.Users SET EMAIL = '"+theModel.getEmail()+"', FIRSTNAME = '"+theModel.getFirstName()+"', LASTNAME = '"+theModel.getLastName()+"', PASSWORD = '"+theModel.getPassword()+"', GPA = '"+theModel.getGPA()+"', OUTOF = '"+theModel.getOUTOF()+"', ACT = '"+theModel.getACT()+"', SAT = '"+theModel.getSAT()+"', TAGLINE = '"+theModel.getTAGLINE()+"', PICTURE = '"+theModel.getPICTURE()+"', MATERIAL = '"+theModel.getMATERIAL()+"', SECURITYQUESTION = '"+theModel.getSECURITYQUESTION()+"', SECURITYANSWER = '"+theModel.getSECURITYANSWER()+"' ";
+            insertSQL += "WHERE EMAIL='"+theModel.getEmail()+"'";
+            System.out.println(insertSQL);
+            PreparedStatement ps=DBConn.prepareStatement(insertSQL);
+            rowCount=ps.executeUpdate();
+            DBConn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        // if insert is successful, rowCount will be set to 1 (1 row inserted successfully). Else, insert failed.
+        System.out.println("debugging, here.");
+       if (rowCount==1) return true;
+       else return false;
+
+    }
+    @Override
     public ProfileBean[] findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -123,9 +153,48 @@ public class ProfileDAOImpl implements ProfileDAO{
             ResultSet rs= ps.executeQuery();
             if(rs.next()){
                 if(theModel.getLoginPassword().equals(rs.getString("PASSWORD"))){
-                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"));
+                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"),rs.getString("GPA"),rs.getString("OUTOF"),rs.getString("ACT"),rs.getString("SAT"),rs.getString("TAGLINE"),rs.getString("PICTURE"),rs.getString("MATERIAL"),rs.getString("SECURITYQUESTION"),rs.getString("SECURITYANSWER"));
                     return returnBean;
                 }
+            }
+            else{
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!1USER NOT FOUND");
+            }
+            DBConn.close();
+        }   catch (SQLException ex) {
+            //Logger.getLogger(LogInImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
+    
+        @Override
+    public ProfileBean getProfile(String viewEmail){
+   
+         System.out.println("HELLOOOOOOOOOOOOO11111");
+        
+         try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+
+        
+        try {
+            String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB;create=true";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+             //System.out.println("HELLOOOOOOOOOOOOO222");
+            
+            String statementString = "Select * From linkedU.users Where email='"+viewEmail+"'";
+            System.out.print(statementString);
+            PreparedStatement ps = DBConn.prepareStatement(statementString);
+            ResultSet rs= ps.executeQuery();
+            if(rs.next()){
+                //if(theModel.getLoginPassword().equals(rs.getString("PASSWORD"))){
+                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"),rs.getString("GPA"),rs.getString("OUTOF"),rs.getString("ACT"),rs.getString("SAT"),rs.getString("TAGLINE"),rs.getString("PICTURE"),rs.getString("MATERIAL"),rs.getString("SECURITYQUESTION"),rs.getString("SECURITYANSWER"));
+                    return returnBean;
+                //}
             }
             else{
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!1USER NOT FOUND");
@@ -158,7 +227,7 @@ public class ProfileDAOImpl implements ProfileDAO{
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
              //System.out.println("HELLOOOOOOOOOOOOO222");
             Statement statement = DBConn.createStatement();
-            String statementString = "Delete From linkedU.users Where email='"+theModel.getLoginEmail()+"'";
+            String statementString = "Delete From linkedU.users Where email='"+theModel.getEmail()+"'";
             statement.executeUpdate(statementString);
             DBConn.close();
         }   catch (SQLException ex) {

@@ -2,13 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
     <body>
 
+        <f:metadata>
+            <f:event type ="preRenderView" listener="#{profileController.setUpViewProfile()}"/>
+        </f:metadata>
+        
         <ui:composition template="./template.xhtml">
 
-           <ui:define name="login">
+            <ui:define name="login">
                 <h:form class="navbar-form navbar-right">
                     <div class="dropdown">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -28,7 +33,37 @@
             </ui:define>
 
             <ui:define name="content">
-                content
+                <div class="container">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: left; font-size: 25px ">
+                        <h:form class="form-inline">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+
+                                    Edit Profile:<br/><br/>
+
+
+                                    Email <h:inputText p:placeHolder="Email" value="#{profileController.viewModel.email}" id="email" class="form-control"/><br/>
+                                    First Name <h:inputText p:placeHolder="First Name" value="#{profileController.viewModel.firstName}" id="fname" class="form-control"/><br/>
+                                    Last Name<h:inputText p:placeHolder="Last Name" value="#{profileController.viewModel.lastName}" id="lname" class="form-control"/><br/>
+                                    GPA <h:inputText p:placeHolder="No GPA On Record" value="#{profileController.viewModel.GPA}" id="gpa" class="form-control"/><br/>
+                                    Out Of<h:inputText p:placeHolder="Out Of" value="#{profileController.viewModel.OUTOF}" id="outof" class="form-control"/><br/>
+                                    ACT<h:inputText p:placeHolder="No ACT Score On Record" value="#{profileController.viewModel.ACT}" id="act" class="form-control"/><br/>
+                                    SAT<h:inputText p:placeHolder="No SAT On Record" value="#{profileController.viewModel.SAT}" id="sat" class="form-control"/><br/>
+                                    Tagline<h:inputText p:placeHolder="Enter A Personal Tagline" value="#{profileController.viewModel.TAGLINE}" id="tagline" class="form-control"/><br/>
+                                    Picture <h:inputText p:placeHolder="Upload a picture, not yet implemented" value="#{profileController.viewModel.PICTURE}" id="pic" class="form-control"/><br/>
+                                    Material <h:inputText p:placeHolder="Upload material, not yet implemented" value="#{profileController.viewModel.MATERIAL}" id="Material" class="form-control"/><br/>
+                                    
+                                    <br/>
+
+                                    <h:commandButton id="home" value="Go Home" class="btn btn-primary" action="#{profileController.goHome()}"></h:commandButton>  <br/>
+
+
+                                </div>
+
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
             </ui:define>
 
         </ui:composition>

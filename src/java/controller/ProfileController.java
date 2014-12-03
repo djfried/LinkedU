@@ -29,12 +29,13 @@ import model.ProfileBean;
 @SessionScoped
 public class ProfileController implements Serializable {
     
-    String userEmail="";
+    private String userEmail="";
     private String status ="";
     private String signUpStatus="";
     private ArrayList<ProfileBean> studentResults=new ArrayList<ProfileBean>(); 
     private ProfileBean theModel;
-
+    private ProfileBean viewModel;
+    private String viewingProfile ="";
     /**
      * Creates a new instance of profileController
      */
@@ -51,34 +52,41 @@ public class ProfileController implements Serializable {
 
     public String createProfile() {
         ProfileDAO aProfileDAO = new ProfileDAOImpl();
-        theModel.setEmail(theModel.getEmail().toLowerCase());
-        int rowCount = aProfileDAO.createProfile(theModel);  // Doing anything with the object after this?
+        getTheModel().setEmail(getTheModel().getEmail().toLowerCase());
+        int rowCount = aProfileDAO.createProfile(getTheModel());  // Doing anything with the object after this?
 
         if (rowCount == 1) {
             return "home.xhtml"; // navigate to "response.xhtml"
         } else {
-            signUpStatus = "Email address already exist!";
+            setSignUpStatus("Email address already exist!");
             return "";
         }
     }
+    
+    public String saveProfile(){
+    
+    ProfileDAO aProfileDAO = new ProfileDAOImpl();
+    boolean saved  = aProfileDAO.save(getTheModel());
+    if(saved)return "home.xhtml";
+    else return "";
+    }
+    
     public String login(){
         
        ProfileDAO aProfileDAO = new ProfileDAOImpl();
-       theModel.setLoginEmail(theModel.getLoginEmail().toLowerCase());
-       ProfileBean tempBean = aProfileDAO.login(theModel);
+        getTheModel().setLoginEmail(getTheModel().getLoginEmail().toLowerCase());
+       ProfileBean tempBean = aProfileDAO.login(getTheModel());
       System.out.println("AFTER DAO!!!!!!!!!");
 
        if(tempBean!=null ){
            System.out.println(tempBean.getEmail());
-           theModel.setEmail(tempBean.getEmail());
-           theModel.setPassword(tempBean.getPassword());
-           theModel.setFirstName(tempBean.getFirstName());
-           theModel.setLastName(tempBean.getLastName());
-           System.out.println("login model first name is "+theModel.getFirstName());
-           userEmail = theModel.getEmail();
+            setTheModel(tempBean);
+           System.out.println("login model question is "+getTheModel().getSECURITYQUESTION());
+           System.out.println("login model first name is "+getTheModel().getFirstName());
+            setUserEmail(getTheModel().getEmail());
            return "home.xhtml";
        }else{
-           status = "Login Failed";
+            setStatus("Login Failed");
        }
         
         return "";
@@ -92,7 +100,7 @@ public class ProfileController implements Serializable {
     public String deleteAccount()
     {
         ProfileDAO aProfileDAO = new ProfileDAOImpl();
-        aProfileDAO.delete(theModel);
+        aProfileDAO.delete(getTheModel());
         System.out.println("DELETED");
         return this.logout();
     }
@@ -104,13 +112,40 @@ public class ProfileController implements Serializable {
     public void populateStudentSearch(){
     
         ProfileDAO aProfileDAO = new ProfileDAOImpl();
-        studentResults = aProfileDAO.searchStudents(theModel);
+        setStudentResults(aProfileDAO.searchStudents(getTheModel()));
     } 
     public ArrayList<ProfileBean> getStudentResults(){
             return studentResults;
     }
+    public void setUpViewProfile(){
+    
+               ProfileDAO aProfileDAO = new ProfileDAOImpl();
+      
+       ProfileBean tempBean = aProfileDAO.getProfile(getViewingProfile());
+      System.out.println("in setupVIEWPPROFILE");
+
+       if(tempBean!=null ){
+           System.out.println(tempBean.getEmail());
+            setViewModel(tempBean);
+           System.out.println("view model question is "+getTheModel().getSECURITYQUESTION());
+           System.out.println("view model first name is "+getTheModel().getFirstName());
+           //userEmail = theModel.getEmail();
+          // return "home.xhtml";
+       }
+        
+  
+        
+        
+    }
     public String viewProfile()
     {
+        
+        //this method needs to some how save the email of which profile to view.
+        
+        //for testing purposes, any viewing of proviles will be taken to the hasz1012@gmail.com profile.
+        setViewingProfile("hasz1012@gmail.com");
+        
+        
         String response="profile.xhtml?faces-redirect=true";
         return response;
     }
@@ -121,7 +156,9 @@ public class ProfileController implements Serializable {
     public String getStatus() {
         return status;
     }
-
+    public String goHome(){
+        return "home.xhtml";
+    }
     /**
      * @param status the status to set
      */
@@ -141,6 +178,55 @@ public class ProfileController implements Serializable {
      */
     public void setSignUpStatus(String signUpStatus) {
         this.signUpStatus = signUpStatus;
+    }
+
+    /**
+     * @return the userEmail
+     */
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    /**
+     * @param userEmail the userEmail to set
+     */
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    /**
+     * @param studentResults the studentResults to set
+     */
+    public void setStudentResults(ArrayList<ProfileBean> studentResults) {
+        this.studentResults = studentResults;
+    }
+
+    /**
+     * @return the viewModel
+     */
+    public ProfileBean getViewModel() {
+        return viewModel;
+    }
+
+    /**
+     * @param viewModel the viewModel to set
+     */
+    public void setViewModel(ProfileBean viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    /**
+     * @return the viewingProfile
+     */
+    public String getViewingProfile() {
+        return viewingProfile;
+    }
+
+    /**
+     * @param viewingProfile the viewingProfile to set
+     */
+    public void setViewingProfile(String viewingProfile) {
+        this.viewingProfile = viewingProfile;
     }
     
 }

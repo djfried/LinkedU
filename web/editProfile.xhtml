@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+        <ui:composition template="./template.xhtml">
+
+
+
+            <ui:define name="login">
+                <h:form class="navbar-form navbar-right">
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Options<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Delete Account" role="menuitem" action="#{profileController.deleteAccount()}"/></a>
+                            </li>  
+                        </ul>
+
+                    </div>
+                </h:form>
+            </ui:define>
+
+
+            <ui:define name="content">
+                <div class="container">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: left; font-size: 25px ">
+                        <h:form class="form-inline">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+
+                                    Edit Profile:<br/><br/>
+
+                                    
+                                    Email <h:inputText p:placeHolder="Email" value="#{profileController.theModel.email}" id="email" class="form-control"/><br/>
+                                    First Name <h:inputText p:placeHolder="First Name" value="#{profileController.theModel.firstName}" id="fname" class="form-control"/><br/>
+                                    Last Name<h:inputText p:placeHolder="Last Name" value="#{profileController.theModel.lastName}" id="lname" class="form-control"/><br/>
+                                    GPA <h:inputText p:placeHolder="No GPA On Record" value="#{profileController.theModel.GPA}" id="gpa" class="form-control"/><br/>
+                                    Out Of<h:inputText p:placeHolder="Out Of" value="#{profileController.theModel.OUTOF}" id="outof" class="form-control"/><br/>
+                                    ACT<h:inputText p:placeHolder="No ACT Score On Record" value="#{profileController.theModel.ACT}" id="act" class="form-control"/><br/>
+                                    SAT<h:inputText p:placeHolder="No SAT On Record" value="#{profileController.theModel.SAT}" id="sat" class="form-control"/><br/>
+                                    Tagline<h:inputText p:placeHolder="Enter A Personal Tagline" value="#{profileController.theModel.TAGLINE}" id="tagline" class="form-control"/><br/>
+                                    Picture <h:inputText p:placeHolder="Upload a picture, not yet implemented" value="#{profileController.theModel.PICTURE}" id="pic" class="form-control"/><br/>
+                                    Material <h:inputText p:placeHolder="Upload material, not yet implemented" value="#{profileController.theModel.MATERIAL}" id="Material" class="form-control"/><br/>
+                                    Security Question: <h:inputText p:placeHolder="Think Of A Security Question" value="#{profileController.theModel.SECURITYQUESTION}" id="sq" class="form-control"/><br/>
+                                    Security Answer: <h:inputText p:placeHolder="Now Think Of An Answer" value="#{profileController.theModel.SECURITYANSWER}" id="sa" class="form-control"/><br/>
+                                    
+                                    <br/>
+                                   
+                                    <h:commandButton id="loginButton" value="Save Profile" class="btn btn-primary" action="#{profileController.saveProfile()}"></h:commandButton>  <br/>
+
+                                    
+                                </div>
+
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
