@@ -67,7 +67,7 @@ public class ProfileDAOImpl implements ProfileDAO{
             String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB;create=true";
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
             
-            String insertSQL="UPDATE linkedu.Users SET EMAIL = '"+theModel.getEmail()+"', FIRSTNAME = '"+theModel.getFirstName()+"', LASTNAME = '"+theModel.getLastName()+"', PASSWORD = '"+theModel.getPassword()+"', GPA = '"+theModel.getGPA()+"', OUTOF = '"+theModel.getOUTOF()+"', ACT = '"+theModel.getACT()+"', SAT = '"+theModel.getSAT()+"', TAGLINE = '"+theModel.getTAGLINE()+"', PICTURE = '"+theModel.getPICTURE()+"', MATERIAL = '"+theModel.getMATERIAL()+"', SECURITYQUESTION = '"+theModel.getSECURITYQUESTION()+"', SECURITYANSWER = '"+theModel.getSECURITYANSWER()+"' ";
+            String insertSQL="UPDATE linkedu.Users SET EMAIL = '"+theModel.getEmail()+"', FIRSTNAME = '"+theModel.getFirstName()+"', LASTNAME = '"+theModel.getLastName()+"', PASSWORD = '"+theModel.getPassword()+"', GPA = "+theModel.getGPA()+", OUTOF = "+theModel.getOUTOF()+", ACT = "+theModel.getACT()+", SAT = "+theModel.getSAT()+", TAGLINE = '"+theModel.getTAGLINE()+"', PICTURE = '"+theModel.getPICTURE()+"', MATERIAL = '"+theModel.getMATERIAL()+"', SECURITYQUESTION = '"+theModel.getSECURITYQUESTION()+"', SECURITYANSWER = '"+theModel.getSECURITYANSWER()+"' ";
             insertSQL += "WHERE EMAIL='"+theModel.getEmail()+"'";
             System.out.println(insertSQL);
             PreparedStatement ps=DBConn.prepareStatement(insertSQL);
@@ -153,7 +153,7 @@ public class ProfileDAOImpl implements ProfileDAO{
             ResultSet rs= ps.executeQuery();
             if(rs.next()){
                 if(theModel.getLoginPassword().equals(rs.getString("PASSWORD"))){
-                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"),rs.getString("GPA"),rs.getString("OUTOF"),rs.getString("ACT"),rs.getString("SAT"),rs.getString("TAGLINE"),rs.getString("PICTURE"),rs.getString("MATERIAL"),rs.getString("SECURITYQUESTION"),rs.getString("SECURITYANSWER"));
+                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"),rs.getDouble("GPA"),rs.getDouble("OUTOF"),rs.getInt("ACT"),rs.getInt("SAT"),rs.getString("TAGLINE"),rs.getString("PICTURE"),rs.getString("MATERIAL"),rs.getString("SECURITYQUESTION"),rs.getString("SECURITYANSWER"));
                     return returnBean;
                 }
             }
@@ -192,7 +192,7 @@ public class ProfileDAOImpl implements ProfileDAO{
             ResultSet rs= ps.executeQuery();
             if(rs.next()){
                 //if(theModel.getLoginPassword().equals(rs.getString("PASSWORD"))){
-                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"),rs.getString("GPA"),rs.getString("OUTOF"),rs.getString("ACT"),rs.getString("SAT"),rs.getString("TAGLINE"),rs.getString("PICTURE"),rs.getString("MATERIAL"),rs.getString("SECURITYQUESTION"),rs.getString("SECURITYANSWER"));
+                    ProfileBean returnBean = new ProfileBean(rs.getString("FIRSTNAME"),rs.getString("LASTNAME"),rs.getString("EMAIL"),rs.getString("PASSWORD"),rs.getDouble("GPA"),rs.getDouble("OUTOF"),rs.getInt("ACT"),rs.getInt("SAT"),rs.getString("TAGLINE"),rs.getString("PICTURE"),rs.getString("MATERIAL"),rs.getString("SECURITYQUESTION"),rs.getString("SECURITYANSWER"));
                     return returnBean;
                 //}
             }

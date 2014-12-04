@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
     <body>
+
+    
+        
         <ui:composition template="./template.xhtml">
-
-
 
             <ui:define name="login">
                 <h:form class="navbar-form navbar-right">
@@ -31,40 +32,28 @@
                     </div>
                 </h:form>
             </ui:define>
-
+            
 
             <ui:define name="content">
                 <div class="container">
-                    <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px ">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: left; font-size: 25px ">
                         <h:form class="form-inline">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-
                                     
-
-                                    Search For A University<br/>
-                                    <a href="faces/universitySearch.xhtml">
-                                        <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px" >
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                        </button><br/><br/>
-                                    </a>
-
-
-                                    Search For Other Students<br/>
-                                    <a href="studentSearch.xhtml">
-                                        <button type="button" class="btn btn-default" aria-label="Left Align" style="font-size: 50px">
-                                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                        </button><br/>
-                                    </a>
-
-                                </div>
-
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-
-                                    Showcased University Banner Image Goes Here!
+                                    <table>
+                                        <tr> 
+                                            <td>To Email: </td><td><h:outputText  p:placeHolder="Email" value="#{searchController.viewModel.email}" id="email" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Message:</td><td><h:inputTextarea id="messageContent" rows ="4" cols="20" style="font-size: 12px" value = "#{searchController.messageStudentContent}"/></td>
+                                        </tr>
+                                    </table>
                                     
+                                    
+                                    <h:commandButton id="sendMessage" value="Send Message" class="btn btn-primary" action="#{searchController.sendMessageToStudent()}"></h:commandButton>  &nbsp; &nbsp; &nbsp;
+                                    <h:commandButton id="home" value="Go Home" class="btn btn-primary" action="#{searchController.goHome()}"></h:commandButton>  <br/>
+
 
                                 </div>
 
@@ -73,6 +62,7 @@
                     </div>
                 </div>
             </ui:define>
+
         </ui:composition>
 
     </body>

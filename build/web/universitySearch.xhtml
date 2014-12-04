@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
+<!--        <f:metadata>
+            <f:event type ="preRenderView" listener="#{universityController.populateUniversitySearch()}"/>
+        </f:metadata>-->
         <ui:composition template="./template.xhtml">
-
-
-
-            <<ui:define name="login">
+            <ui:define name="login">
                 <h:form class="navbar-form navbar-right">
                     <div class="dropdown">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -32,13 +33,93 @@
 
             <ui:define name="content">
                 <div class="container">
-                    <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px ">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px">
                         <h:form class="form-inline">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-
-                                        in searching for uni's
-
+                                    <h:inputText p:placeHolder="University Name" value="#{universityController.theModel.name}"
+                                                 id="Name" class="form-control"/>
+                                    <h:inputText p:placeHolder="City" value="#{universityController.theModel.city}"
+                                                 id="city" class="form-control"/> 
+                                    <h:selectOneMenu class="form-control" value="#{universityController.theModel.state}">
+                                        <f:selectItem itemValue="AK" itemLabel="AK" />
+                                        <f:selectItem itemValue="AL" itemLabel="AL" />
+                                        <f:selectItem itemValue="AR" itemLabel="AR" />
+                                        <f:selectItem itemValue="AZ" itemLabel="AZ" />
+                                        <f:selectItem itemValue="CA" itemLabel="CA" />
+                                        <f:selectItem itemValue="CO" itemLabel="CO" />
+                                        <f:selectItem itemValue="CT" itemLabel="CT" />
+                                        <f:selectItem itemValue="DC" itemLabel="DC" />
+                                        <f:selectItem itemValue="DE" itemLabel="DE" />
+                                        <f:selectItem itemValue="FL" itemLabel="FL" />
+                                        <f:selectItem itemValue="GA" itemLabel="GA" />
+                                        <f:selectItem itemValue="HI" itemLabel="HI" />
+                                        <f:selectItem itemValue="IA" itemLabel="IA" />
+                                        <f:selectItem itemValue="ID" itemLabel="ID" />
+                                        <f:selectItem itemValue="IL" itemLabel="IL" />
+                                        <f:selectItem itemValue="IN" itemLabel="IN" />
+                                        <f:selectItem itemValue="KS" itemLabel="KS" />
+                                        <f:selectItem itemValue="KY" itemLabel="KY" />
+                                        <f:selectItem itemValue="LA" itemLabel="LA" />
+                                        <f:selectItem itemValue="MA" itemLabel="MA" />
+                                        <f:selectItem itemValue="MD" itemLabel="MD" />
+                                        <f:selectItem itemValue="ME" itemLabel="ME" />
+                                        <f:selectItem itemValue="MI" itemLabel="MI" />
+                                        <f:selectItem itemValue="MO" itemLabel="MO" />
+                                        <f:selectItem itemValue="MS" itemLabel="MS" />
+                                        <f:selectItem itemValue="MT" itemLabel="MT" />
+                                        <f:selectItem itemValue="NC" itemLabel="NC" />
+                                        <f:selectItem itemValue="ND" itemLabel="ND" />
+                                        <f:selectItem itemValue="NE" itemLabel="NE" />
+                                        <f:selectItem itemValue="NH" itemLabel="NH" />
+                                        <f:selectItem itemValue="NJ" itemLabel="NJ" />
+                                        <f:selectItem itemValue="NM" itemLabel="NM" />
+                                        <f:selectItem itemValue="NV" itemLabel="NV" />
+                                        <f:selectItem itemValue="NY" itemLabel="NY" />
+                                        <f:selectItem itemValue="OH" itemLabel="OH" />
+                                        <f:selectItem itemValue="OK" itemLabel="OK" />
+                                        <f:selectItem itemValue="OR" itemLabel="OR" />
+                                        <f:selectItem itemValue="PA" itemLabel="PA" />
+                                        <f:selectItem itemValue="PR" itemLabel="PR" />
+                                        <f:selectItem itemValue="PW" itemLabel="PW" />
+                                        <f:selectItem itemValue="RI" itemLabel="RI" />
+                                        <f:selectItem itemValue="SC" itemLabel="SC" />
+                                        <f:selectItem itemValue="SD" itemLabel="SD" />
+                                        <f:selectItem itemValue="TN" itemLabel="TN" />
+                                        <f:selectItem itemValue="TX" itemLabel="TX" />
+                                        <f:selectItem itemValue="UT" itemLabel="UT" />
+                                        <f:selectItem itemValue="VA" itemLabel="VA" />
+                                        <f:selectItem itemValue="VI" itemLabel="VI" />
+                                        <f:selectItem itemValue="VT" itemLabel="VT" />
+                                        <f:selectItem itemValue="WA" itemLabel="WA" />
+                                        <f:selectItem itemValue="WI" itemLabel="WI" />
+                                        <f:selectItem itemValue="WV" itemLabel="WV" />
+                                        <f:selectItem itemValue="WY" itemLabel="WY" />                                                              
+                                    </h:selectOneMenu>
+                                    <h:commandButton class="btn btn-primary" value="Search" 
+                                                     action="#{universityController.populateUniversitySearch()}"/>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h:dataTable value="#{universityController.getUniversityResults()}" var="s" 
+                                                 styleClass="table table-hover">
+                                        <h:column>
+                                            <f:facet name="header">Institution Name</f:facet>
+                                            <a href="http://#{s.web}">#{s.name}</a>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">City</f:facet>
+                                                #{s.city}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">State</f:facet>
+                                                #{s.state}
+                                        </h:column>
+                                        <h:column>
+                                            <h:button class="btn btn-primary" value="View Profile" outcome="#{profileController.viewProfile()}"/>
+                                        </h:column>
+                                    </h:dataTable>
 
                                 </div>
                             </div>
@@ -46,6 +127,7 @@
                     </div>
                 </div>
             </ui:define>
+
         </ui:composition>
 
     </body>

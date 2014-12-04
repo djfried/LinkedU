@@ -34,8 +34,6 @@
                     </div>
                 </h:form>
             </ui:define>
-
-
             <ui:define name="content">
                 <div class="container">
                     <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px">
@@ -60,14 +58,6 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-
-
-                                    <!--                                    <h:form>
-                                                                            
-                                                                            <h:outputText id="searchResult" escape="false" value="#{profileController.getStudentResults()}"/>
-                                                                            
-                                                                            
-                                                                        </h:form>-->
                                     <h:dataTable id="studentTable" class="table table-hover" value="#{profileController.getStudentResults()}" var="s">
                                         <h:column>
                                             <f:facet name="header">First Name</f:facet>

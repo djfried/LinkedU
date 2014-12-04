@@ -16,9 +16,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.swing.JOptionPane;
 import model.ProfileBean;
 
 /**
@@ -28,14 +30,19 @@ import model.ProfileBean;
 @ManagedBean
 @SessionScoped
 public class ProfileController implements Serializable {
-    
+    private String testVid = "http://www.youtube.com/v/XGSy3_Czz8k";
     private String userEmail="";
     private String status ="";
+    private String pwEmail="";
+    private String pwQuestion="";
+    private String pwAnswer = "";
     private String signUpStatus="";
+    private String pwResetResult="";
     private ArrayList<ProfileBean> studentResults=new ArrayList<ProfileBean>(); 
     private ProfileBean theModel;
     private ProfileBean viewModel;
     private String viewingProfile ="";
+    private String messageStudentContent="Enter Message Here";
     /**
      * Creates a new instance of profileController
      */
@@ -46,6 +53,7 @@ public class ProfileController implements Serializable {
         return theModel;
     }
 
+    
     public void setTheModel(ProfileBean theModel) {
         this.theModel = theModel;
     }
@@ -73,9 +81,9 @@ public class ProfileController implements Serializable {
     
     public String login(){
         
-       ProfileDAO aProfileDAO = new ProfileDAOImpl();
-        getTheModel().setLoginEmail(getTheModel().getLoginEmail().toLowerCase());
-       ProfileBean tempBean = aProfileDAO.login(getTheModel());
+      ProfileDAO aProfileDAO = new ProfileDAOImpl();
+      getTheModel().setLoginEmail(getTheModel().getLoginEmail().toLowerCase());
+      ProfileBean tempBean = aProfileDAO.login(getTheModel());
       System.out.println("AFTER DAO!!!!!!!!!");
 
        if(tempBean!=null ){
@@ -84,6 +92,9 @@ public class ProfileController implements Serializable {
            System.out.println("login model question is "+getTheModel().getSECURITYQUESTION());
            System.out.println("login model first name is "+getTheModel().getFirstName());
             setUserEmail(getTheModel().getEmail());
+            if(getTheModel().getEmail().equalsIgnoreCase("admin@gmail.com")){
+                return "admin.xhtml";
+            }
            return "home.xhtml";
        }else{
             setStatus("Login Failed");
@@ -108,7 +119,15 @@ public class ProfileController implements Serializable {
     
         return "universitySearch.xhtml";
     }
-   
+    public void populatePWResetQuestion(){
+        //check DB for email, if it has one, get the question and set to pwQuestion, else set error message to pwQuestion
+        setPwQuestion("Test Question");
+    }
+    public void requestPWReset(){
+        //check if answer = the email DB account password, 
+        //if correct, email a link to reset, else print error message.
+        setPwResetResult(getPwAnswer());
+    }
     public void populateStudentSearch(){
     
         ProfileDAO aProfileDAO = new ProfileDAOImpl();
@@ -118,11 +137,11 @@ public class ProfileController implements Serializable {
             return studentResults;
     }
     public void setUpViewProfile(){
-    
+            
                ProfileDAO aProfileDAO = new ProfileDAOImpl();
       
        ProfileBean tempBean = aProfileDAO.getProfile(getViewingProfile());
-      System.out.println("in setupVIEWPPROFILE");
+        System.out.println("in setupVIEWPPROFILE");
 
        if(tempBean!=null ){
            System.out.println(tempBean.getEmail());
@@ -137,15 +156,37 @@ public class ProfileController implements Serializable {
         
         
     }
-    public String viewProfile()
-    {
+    
+    public String sendMessageToStudent(){
+    
+    System.out.println("Message will be:");
+    System.out.println(getMessageStudentContent());
+    //actually send an email here... SETH?
+   // JOptionPane.showMessageDialog(null,"Message Sent To "+viewModel.getEmail());
+    
+    return "home.xhtml";
+            
+    
+    }
+    
+    public String goToEditProfile(){return "editProfile.xhtml";}
+    public String messageStudent() {return "messageStudent.xhtml";}
+    public String viewOwnProfile(){
+    
+        setViewingProfile(getTheModel().getEmail());
         
+        
+        String response="profile.xhtml?faces-redirect=true";
+        return response;
+    }
+    public String viewProfile(int index)
+    {
+        System.out.println(index);
         //this method needs to some how save the email of which profile to view.
         
         //for testing purposes, any viewing of proviles will be taken to the hasz1012@gmail.com profile.
         setViewingProfile("hasz1012@gmail.com");
-        
-        
+//        viewModel= searchList.get(index);
         String response="profile.xhtml?faces-redirect=true";
         return response;
     }
@@ -228,5 +269,91 @@ public class ProfileController implements Serializable {
     public void setViewingProfile(String viewingProfile) {
         this.viewingProfile = viewingProfile;
     }
+
+    /**
+     * @return the messageStudentContent
+     */
+    public String getMessageStudentContent() {
+        return messageStudentContent;
+    }
+
+    /**
+     * @param messageStudentContent the messageStudentContent to set
+     */
+    public void setMessageStudentContent(String messageStudentContent) {
+        this.messageStudentContent = messageStudentContent;
+    }
+
+    /**
+     * @return the testVid
+     */
+    public String getTestVid() {
+        return testVid;
+    }
+
+    /**
+     * @param testVid the testVid to set
+     */
+    public void setTestVid(String testVid) {
+        this.testVid = testVid;
+    }
+
+    /**
+     * @return the pwEmail
+     */
+    public String getPwEmail() {
+        return pwEmail;
+    }
+
+    /**
+     * @param pwEmail the pwEmail to set
+     */
+    public void setPwEmail(String pwEmail) {
+        this.pwEmail = pwEmail;
+    }
+
+    /**
+     * @return the pwQuestion
+     */
+    public String getPwQuestion() {
+        return pwQuestion;
+    }
+
+    /**
+     * @param pwQuestion the pwQuestion to set
+     */
+    public void setPwQuestion(String pwQuestion) {
+        this.pwQuestion = pwQuestion;
+    }
+
+    /**
+     * @return the pwAnswer
+     */
+    public String getPwAnswer() {
+        return pwAnswer;
+    }
+
+    /**
+     * @param pwAnswer the pwAnswer to set
+     */
+    public void setPwAnswer(String pwAnswer) {
+        this.pwAnswer = pwAnswer;
+    }
+
+    /**
+     * @return the pwResetResult
+     */
+    public String getPwResetResult() {
+        return pwResetResult;
+    }
+
+    /**
+     * @param pwResetResult the pwResetResult to set
+     */
+    public void setPwResetResult(String pwResetResult) {
+        this.pwResetResult = pwResetResult;
+    }
+
+   
     
 }

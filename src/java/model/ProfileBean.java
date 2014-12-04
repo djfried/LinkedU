@@ -16,10 +16,10 @@ public class ProfileBean {
     private String password;
     private String loginEmail;
     private String loginPassword;
-    private String GPA;
-    private String OUTOF;
-    private String ACT;
-    private String SAT;
+    private Double GPA ;
+    private Double OUTOF;
+    private Integer ACT;
+    private Integer SAT;
     private String TAGLINE;
     private String PICTURE;
     private String MATERIAL;
@@ -31,7 +31,7 @@ public class ProfileBean {
         lastName=lname;
         email=em;
     }
-        public ProfileBean(String fname, String lname, String em,String pw, String GPA, String OUTOF, String ACT, String SAT, String TAGLINE, String PICTURE, String MATERIAL, String SECURITYQUESTION, String SECURITYANSWER) {
+        public ProfileBean(String fname, String lname, String em,String pw, Double GPA, Double OUTOF, int ACT, int SAT, String TAGLINE, String PICTURE, String MATERIAL, String SECURITYQUESTION, String SECURITYANSWER) {
         firstName=fname;
         lastName=lname;
         email=em;
@@ -113,56 +113,56 @@ public class ProfileBean {
     /**
      * @return the GPA
      */
-    public String getGPA() {
+    public Double getGPA() {
         return GPA;
     }
 
     /**
      * @param GPA the GPA to set
      */
-    public void setGPA(String GPA) {
+    public void setGPA(Double GPA) {
         this.GPA = GPA;
     }
 
     /**
      * @return the OUTOF
      */
-    public String getOUTOF() {
+    public Double getOUTOF() {
         return OUTOF;
     }
 
     /**
      * @param OUTOF the OUTOF to set
      */
-    public void setOUTOF(String OUTOF) {
+    public void setOUTOF(Double OUTOF) {
         this.OUTOF = OUTOF;
     }
 
     /**
      * @return the ACT
      */
-    public String getACT() {
+    public Integer getACT() {
         return ACT;
     }
 
     /**
      * @param ACT the ACT to set
      */
-    public void setACT(String ACT) {
+    public void setACT(Integer ACT) {
         this.ACT = ACT;
     }
 
     /**
      * @return the SAT
      */
-    public String getSAT() {
+    public Integer getSAT() {
         return SAT;
     }
 
     /**
      * @param SAT the SAT to set
      */
-    public void setSAT(String SAT) {
+    public void setSAT(Integer SAT) {
         this.SAT = SAT;
     }
 

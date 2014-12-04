@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/H:/Project/LinkedU/src/java/controller/ProfileController.java</file>
             <file>file:/H:/Project/LinkedU/src/java/dao/ProfileDAOImpl.java</file>
-            <file>file:/H:/Project/LinkedU/src/java/Uinsert.java</file>
+            <file>file:/H:/Project/LinkedU/src/java/dao/ProfileDAO.java</file>
+            <file>file:/H:/Project/LinkedU/src/java/model/UniversityBean.java</file>
+            <file>file:/H:/Project/LinkedU/src/java/model/ProfileBean.java</file>
+            <file>file:/H:/Project/LinkedU/web/studentSearch.xhtml</file>
         </group>
     </open-files>
 </project-private>

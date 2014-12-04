@@ -18,6 +18,9 @@
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Edit Profile" action="#{profileController.goToEditProfile()}"/></a>
+                            </li>
+                            <li role="presentation">
                                 <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
                             </li>
                             <li role="presentation">
@@ -39,25 +42,53 @@
 
                                     Edit Profile:<br/><br/>
 
-                                    
-                                    Email <h:inputText p:placeHolder="Email" value="#{profileController.theModel.email}" id="email" class="form-control"/><br/>
-                                    First Name <h:inputText p:placeHolder="First Name" value="#{profileController.theModel.firstName}" id="fname" class="form-control"/><br/>
-                                    Last Name<h:inputText p:placeHolder="Last Name" value="#{profileController.theModel.lastName}" id="lname" class="form-control"/><br/>
-                                    GPA <h:inputText p:placeHolder="No GPA On Record" value="#{profileController.theModel.GPA}" id="gpa" class="form-control"/><br/>
-                                    Out Of<h:inputText p:placeHolder="Out Of" value="#{profileController.theModel.OUTOF}" id="outof" class="form-control"/><br/>
-                                    ACT<h:inputText p:placeHolder="No ACT Score On Record" value="#{profileController.theModel.ACT}" id="act" class="form-control"/><br/>
-                                    SAT<h:inputText p:placeHolder="No SAT On Record" value="#{profileController.theModel.SAT}" id="sat" class="form-control"/><br/>
-                                    Tagline<h:inputText p:placeHolder="Enter A Personal Tagline" value="#{profileController.theModel.TAGLINE}" id="tagline" class="form-control"/><br/>
-                                    Picture <h:inputText p:placeHolder="Upload a picture, not yet implemented" value="#{profileController.theModel.PICTURE}" id="pic" class="form-control"/><br/>
-                                    Material <h:inputText p:placeHolder="Upload material, not yet implemented" value="#{profileController.theModel.MATERIAL}" id="Material" class="form-control"/><br/>
-                                    Security Question: <h:inputText p:placeHolder="Think Of A Security Question" value="#{profileController.theModel.SECURITYQUESTION}" id="sq" class="form-control"/><br/>
-                                    Security Answer: <h:inputText p:placeHolder="Now Think Of An Answer" value="#{profileController.theModel.SECURITYANSWER}" id="sa" class="form-control"/><br/>
-                                    
-                                    <br/>
-                                   
-                                    <h:commandButton id="loginButton" value="Save Profile" class="btn btn-primary" action="#{profileController.saveProfile()}"></h:commandButton>  <br/>
 
-                                    
+                                    <table>
+
+                                        <tr>   <td>Email:</td><td> <h:inputText p:placeHolder="Email" value="#{profileController.theModel.email}" id="email" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td> First Name:</td><td> <h:inputText p:placeHolder="First Name" value="#{profileController.theModel.firstName}" id="fname" class="form-control"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Last Name:</td><td><h:inputText p:placeHolder="Last Name" value="#{profileController.theModel.lastName}" id="lname" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>GPA:</td><td> <h:inputText p:placeHolder="No GPA On Record" value="#{profileController.theModel.GPA}" id="gpa" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Out Of:</td><td><h:inputText p:placeHolder="Out Of" value="#{profileController.theModel.OUTOF}" id="outof" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>ACT:</td><td><h:inputText p:placeHolder="No ACT Score On Record" value="#{profileController.theModel.ACT}" id="act" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SAT:</td><td><h:inputText p:placeHolder="No SAT On Record" value="#{profileController.theModel.SAT}" id="sat" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tagline:</td><td><h:inputText p:placeHolder="Enter A Personal Tagline" value="#{profileController.theModel.TAGLINE}" id="tagline" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td> Picture: </td><td><h:inputText p:placeHolder="Upload a picture, not yet implemented" value="#{profileController.theModel.PICTURE}" id="pic" class="form-control"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td> Material: </td><td><h:inputText p:placeHolder="Provide a YouTube Link if wanted" value="#{profileController.theModel.MATERIAL}" id="Material" class="form-control"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td>Security Question:</td><td> <h:inputText p:placeHolder="Think Of A Security Question" value="#{profileController.theModel.SECURITYQUESTION}" id="sq" class="form-control"/></td>
+                                        </tr>
+                                        <tr> 
+                                            <td> Security Answer:</td><td> <h:inputText p:placeHolder="Now Think Of An Answer" value="#{profileController.theModel.SECURITYANSWER}" id="sa" class="form-control"/></td>
+                                        </tr>
+                                    </table>
+                                    <br/>
+
+                                    <h:commandButton id="loginButton" value="Save Profile" class="btn btn-primary" action="#{profileController.saveProfile()}"></h:commandButton>  &nbsp; &nbsp; &nbsp;
+                                    <h:commandButton id="viewOwnProfile" value="View Your Profile" class="btn btn-primary" action="#{profileController.viewOwnProfile()}"></h:commandButton>  &nbsp; &nbsp; &nbsp;
+                                    <h:commandButton id="goHomeButton" value="Home" class="btn btn-primary" action="#{profileController.goHome()}"></h:commandButton>
+                                    <br/>
+
+
                                 </div>
 
                             </div>
