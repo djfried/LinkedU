@@ -21,8 +21,10 @@ import model.UniversityBean;
 @ViewScoped
 public class UniversityController implements Serializable {
     
+    private UniversityBean viewModel;
     private ArrayList<UniversityBean> universityResults;
     private UniversityBean theModel;
+    private String viewingUniversity="";
     /**
      * Creates a new instance of UniversityController
      */
@@ -44,6 +46,22 @@ public class UniversityController implements Serializable {
     public void setTheModel(UniversityBean theModel) {
         this.theModel = theModel;
     }
+
+    public UniversityBean getViewModel() {
+        return viewModel;
+    }
+
+    public void setViewModel(UniversityBean viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public String getViewingUniversity() {
+        return viewingUniversity;
+    }
+
+    public void setViewingUniversity(String viewingUniversity) {
+        this.viewingUniversity = viewingUniversity;
+    }
     
     public void populateUniversitySearch()
     {
@@ -53,8 +71,22 @@ public class UniversityController implements Serializable {
     }
     public String viewProfile(int index)
     {
-        
-        return("home.xhtml");
+        setViewModel(universityResults.get(index));
+        System.out.println("NAME: "+viewModel.getName());
+        return("searchedUniversity.xhtml?faces-redirect=true");
+    }
+    public void setUpViewProfile()
+    {
+        UniversityDAO aUniDAO = new UniversityDAOImpl();
+      
+       UniversityBean tempBean = aUniDAO.getProfile(getViewingUniversity());
+        System.out.println("in setupVIEWUNIVERSITY");
+
+       if(tempBean!=null ){
+           System.out.println(tempBean.getName());
+           setViewModel(tempBean);
+           
+        }
     }
     
 }

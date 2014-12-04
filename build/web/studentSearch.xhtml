@@ -59,7 +59,8 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h:dataTable id="studentTable" class="table table-hover" value="#{searchController.getSearchResult()}" var="s" binding="#{table}">
+                                    <h:dataTable id="studentTable" class="table table-hover" 
+                                                 value="#{searchController.getSearchResult()}" var="s" binding="#{table}">
                                         <h:column>
                                             <f:facet name="header">First Name</f:facet>
                                                 #{s.firstName}

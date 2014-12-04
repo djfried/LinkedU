@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <f:metadata>
+            <f:event type ="preRenderView" listener="#{universityController.setUpViewProfile()}"/>
+        </f:metadata>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="login">
+                <h:form class="navbar-form navbar-right">
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Options<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Edit Profile" action="#{profileController.goToEditProfile()}"/></a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Delete Account" role="menuitem" action="#{profileController.deleteAccount()}"/></a>
+                            </li>  
+                        </ul>
+
+                    </div>
+                </h:form>
+            </ui:define>
+
+
+            <ui:define name="content">
+                <div class="container">
+                    <div class="starter-template" style="padding: 50px 15px; text-align: left; font-size: 25px ">
+                        <h:form class="form-inline">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table>
+                                        <tr> 
+                                            <td>Institution Name: </td><td><h:outputText style="" p:placeHolder="Name" value="#{universityController.viewModel.name}" id="name" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address:</td><td> <h:outputText p:placeHolder="Address" value="#{universityController.viewModel.address}" id="address" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td><td><h:outputText p:placeHolder="City" value="#{universityController.viewModel.city}" id="city" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>State:</td><td><h:outputText p:placeHolder="State" value="#{universityController.viewModel.state}" id="state" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zip:</td><td><h:outputText p:placeHolder="Zip" value="#{universityController.viewModel.zip}" id="zip" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:</td><td><h:outputText p:placeHolder="Phone" value="#{universityController.viewModel.phone}" id="phone" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Website:</td><td><a href="http://#{universityController.viewModel.web}"><h:outputText p:placeHolder="Website" value="#{universityController.viewModel.web}" id="web" class="form-control"/></a></td>
+                                        </tr>
+                                    </table>
+                                    <br/>
+
+
+                                    
+
+
+                                </div>
+
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

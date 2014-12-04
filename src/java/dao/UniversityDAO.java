@@ -15,5 +15,5 @@ import model.UniversityBean;
 public interface UniversityDAO {
     
     public ArrayList<UniversityBean> searchUniversity(UniversityBean theModel);
-    
+    public UniversityBean getProfile(String name);
 }

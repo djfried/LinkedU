@@ -96,5 +96,47 @@ public class UniversityDAOImpl implements UniversityDAO {
         }
         return answer;
     }
+    @Override
+    public UniversityBean getProfile(String viewName)
+    {
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(0);
+        }
+
+        
+        try {
+            String myDB = "jdbc:derby://gfish.it.ilstu.edu:1527/tdhasz_Fall14_LinkedUDB;create=true";
+            Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
+             //System.out.println("HELLOOOOOOOOOOOOO222");
+            
+            String statementString = "Select * From linkedU.users Where INSTITUTION_NAME='"+viewName+"'";
+            System.out.print(statementString);
+            PreparedStatement ps = DBConn.prepareStatement(statementString);
+            ResultSet rs= ps.executeQuery();
+            if(rs.next()){
+                //if(theModel.getLoginPassword().equals(rs.getString("PASSWORD"))){
+                    UniversityBean returnBean = new UniversityBean(rs.getString("INSTITUTION_ID"),
+                            rs.getString("INSTITUTION_NAME"),
+                            rs.getString("INSTITUTION_ADDRESS"),
+                            rs.getString("INSTITUTION_CITY"),
+                            rs.getString("INSTITUTION_STATE"),
+                            rs.getString("INSTITUTION_ZIP"),
+                            rs.getString("INSTITUTION_PHONE"),
+                            rs.getString("INSTITUTION_WEB_ADDRESS"));
+                    return returnBean;
+                //}
+            }
+            else{
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!1USER NOT FOUND");
+            }
+            DBConn.close();
+        }   catch (SQLException ex) {
+            //Logger.getLogger(LogInImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }
