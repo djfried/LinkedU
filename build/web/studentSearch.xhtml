@@ -9,9 +9,6 @@
 
     <body>
 
-        <f:metadata>
-            <f:event type ="preRenderView" listener="#{profileController.populateStudentSearch()}"/>
-        </f:metadata>
         <ui:composition template="./template.xhtml">
 
 
@@ -24,6 +21,9 @@
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Edit Profile" action="#{profileController.goToEditProfile()}"/></a>
+                            </li>
+                            <li role="presentation">
                                 <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
                             </li>
                             <li role="presentation">
@@ -34,31 +34,32 @@
                     </div>
                 </h:form>
             </ui:define>
+
+
             <ui:define name="content">
                 <div class="container">
                     <div class="starter-template" style="padding: 50px 15px; text-align: center; font-size: 25px">
                         <h:form class="form-inline">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h:inputText p:placeHolder="Search For ..." value=""
-                                                 id="seachName" class="form-control"/>
-                                    <h:inputText p:placeHolder="Min GPA" value=""
-                                                 id="gpa" class="form-control"/> 
-                                    <h:inputText p:placeHolder="Near Zip Code ..." value=""
-                                                 id="areaCode" class="form-control"/> <br/>
-                                    <div style ="width:50%; margin: 0 auto">
-                                    <h:selectManyCheckbox id="activitiesID" value="" style="font-size: 15px; text-align: center">
-                                        <f:selectItem id="itemSports"  itemLabel="Sports" itemValue="Sports"/>
-                                       <f:selectItem id="itemMusic" itemLabel="Music" itemValue="Music" />
-                                        <f:selectItem id="itemWork" itemLabel="Work Experience" itemValue="Work Experience" />
-                                         <f:selectItem id="itemOther" itemLabel="Other Special Traits" itemValue="Other Special Traits" />
-                                    </h:selectManyCheckbox><br/>
-                                    </div>
+                                    <h:inputText p:placeHolder="Last Name" value="#{searchController.theModel.lastName}"
+                                                 id="seachLastName" class="form-control"
+                                                 />
+                                    <h:inputText p:placeHolder="First Name" value="#{searchController.theModel.firstName}"
+                                                 id="seachFirstName" class="form-control"/>
+                                    <h:inputText p:placeHolder="Min GPA" value="#{searchController.theModel.GPA}"
+                                                 id="searchGPA" class="form-control"/>
+                                    <h:inputText p:placeHolder="Min SAT" value="#{searchController.theModel.SAT}"
+                                                 id="searchSAT" class="form-control"/>
+                                    <h:inputText p:placeHolder="Min ACT" value="#{searchController.theModel.ACT}"
+                                                 id="searchACT" class="form-control"/><br/>
+                                    <h:commandButton value="Search" action="#{searchController.search()}" class="btn btn-primary"/>
+                                    
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h:dataTable id="studentTable" class="table table-hover" value="#{profileController.getStudentResults()}" var="s">
+                                    <h:dataTable id="studentTable" class="table table-hover" value="#{searchController.getSearchResult()}" var="s" binding="#{table}">
                                         <h:column>
                                             <f:facet name="header">First Name</f:facet>
                                                 #{s.firstName}
@@ -72,7 +73,7 @@
                                                 #{s.email}
                                         </h:column>
                                         <h:column>
-                                            <h:button class="btn btn-primary" value="View Profile" outcome="#{profileController.viewProfile()}"/>
+                                            <h:commandButton class="btn btn-primary" value="View Profile" action="#{searchController.viewProfile(table.rowIndex)}"/>
                                         </h:column>
                                     </h:dataTable>
 

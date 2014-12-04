@@ -47,12 +47,14 @@ public class UniversityController implements Serializable {
     
     public void populateUniversitySearch()
     {
-        System.out.println("CITY: " + theModel.getCity());
-        System.out.println("STATE: " + theModel.getState());
-        System.out.println("NAME: " + theModel.getName());
+        
         UniversityDAO aUniDAO = new UniversityDAOImpl();
-        setUniversityResults(aUniDAO.searchUniversity(theModel.getName(),
-                   theModel.getCity(),theModel.getState()));  
+        setUniversityResults(aUniDAO.searchUniversity(theModel));  
+    }
+    public String viewProfile(int index)
+    {
+        
+        return("home.xhtml");
     }
     
 }

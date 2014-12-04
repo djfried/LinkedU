@@ -14,8 +14,6 @@ import model.UniversityBean;
  */
 public interface UniversityDAO {
     
-    public ArrayList<UniversityBean> searchUniversity();
-    public ArrayList<UniversityBean> searchUniversity(String name,String city,
-            String state);
+    public ArrayList<UniversityBean> searchUniversity(UniversityBean theModel);
     
 }

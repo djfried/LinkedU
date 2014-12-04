@@ -7,9 +7,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-<!--        <f:metadata>
-            <f:event type ="preRenderView" listener="#{universityController.populateUniversitySearch()}"/>
-        </f:metadata>-->
         <ui:composition template="./template.xhtml">
             <ui:define name="login">
                 <h:form class="navbar-form navbar-right">
@@ -18,6 +15,9 @@
                             Options<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Edit Profile" action="#{profileController.goToEditProfile()}"/></a>
+                            </li>
                             <li role="presentation">
                                 <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
                             </li>
@@ -42,6 +42,7 @@
                                     <h:inputText p:placeHolder="City" value="#{universityController.theModel.city}"
                                                  id="city" class="form-control"/> 
                                     <h:selectOneMenu class="form-control" value="#{universityController.theModel.state}">
+                                        <f:selectItem itemValue="" itemLabel="State" />
                                         <f:selectItem itemValue="AK" itemLabel="AK" />
                                         <f:selectItem itemValue="AL" itemLabel="AL" />
                                         <f:selectItem itemValue="AR" itemLabel="AR" />
@@ -102,7 +103,7 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h:dataTable value="#{universityController.getUniversityResults()}" var="s" 
+                                    <h:dataTable value="#{universityController.getUniversityResults()}" var="s" binding="#{table}"
                                                  styleClass="table table-hover">
                                         <h:column>
                                             <f:facet name="header">Institution Name</f:facet>
@@ -117,7 +118,7 @@
                                                 #{s.state}
                                         </h:column>
                                         <h:column>
-                                            <h:button class="btn btn-primary" value="View Profile" outcome="#{profileController.viewProfile()}"/>
+                                            <h:button class="btn btn-primary" value="View Profile" outcome="#{universityController.viewProfile(table.rowIndex)}"/>
                                         </h:column>
                                     </h:dataTable>
 

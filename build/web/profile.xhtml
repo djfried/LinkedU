@@ -10,7 +10,7 @@
         <f:metadata>
             <f:event type ="preRenderView" listener="#{profileController.setUpViewProfile()}"/>
         </f:metadata>
-        
+
         <ui:composition template="./template.xhtml">
 
             <ui:define name="login">
@@ -20,6 +20,9 @@
                             Options<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem"><h:commandLink value="Edit Profile" action="#{profileController.goToEditProfile()}"/></a>
+                            </li>
                             <li role="presentation">
                                 <a role="menuitem"><h:commandLink value="Logout" action="#{profileController.logout()}"/></a>
                             </li>
@@ -32,29 +35,54 @@
                 </h:form>
             </ui:define>
 
+
             <ui:define name="content">
                 <div class="container">
                     <div class="starter-template" style="padding: 50px 15px; text-align: left; font-size: 25px ">
                         <h:form class="form-inline">
                             <div class="panel panel-default">
                                 <div class="panel-body">
+                                    <table>
+                                        <tr> 
+                                            <td>Email: </td><td><h:outputText style="" p:placeHolder="Email" value="#{profileController.viewModel.email}" id="email" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>First Name:</td><td> <h:outputText p:placeHolder="First Name" value="#{profileController.viewModel.firstName}" id="fname" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name:</td><td><h:outputText p:placeHolder="Last Name" value="#{profileController.viewModel.lastName}" id="lname" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>GPA:</td><td> <h:outputText p:placeHolder="No GPA On Record" value="#{profileController.viewModel.GPA}" id="gpa" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Out Of:</td><td><h:outputText p:placeHolder="Out Of" value="#{profileController.viewModel.OUTOF}" id="outof" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>ACT:</td><td><h:outputText p:placeHolder="No ACT Score On Record" value="#{profileController.viewModel.ACT}" id="act" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td> SAT:</td><td><h:outputText p:placeHolder="No SAT On Record" value="#{profileController.viewModel.SAT}" id="sat" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tagline:</td><td><h:outputText p:placeHolder="Enter A Personal Tagline" value="#{profileController.viewModel.TAGLINE}" id="tagline" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Picture: </td><td><h:outputText p:placeHolder="Upload a picture, not yet implemented" value="#{profileController.viewModel.PICTURE}" id="pic" class="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
 
-                                    Edit Profile:<br/><br/>
-
-
-                                    Email <h:inputText p:placeHolder="Email" value="#{profileController.viewModel.email}" id="email" class="form-control"/><br/>
-                                    First Name <h:inputText p:placeHolder="First Name" value="#{profileController.viewModel.firstName}" id="fname" class="form-control"/><br/>
-                                    Last Name<h:inputText p:placeHolder="Last Name" value="#{profileController.viewModel.lastName}" id="lname" class="form-control"/><br/>
-                                    GPA <h:inputText p:placeHolder="No GPA On Record" value="#{profileController.viewModel.GPA}" id="gpa" class="form-control"/><br/>
-                                    Out Of<h:inputText p:placeHolder="Out Of" value="#{profileController.viewModel.OUTOF}" id="outof" class="form-control"/><br/>
-                                    ACT<h:inputText p:placeHolder="No ACT Score On Record" value="#{profileController.viewModel.ACT}" id="act" class="form-control"/><br/>
-                                    SAT<h:inputText p:placeHolder="No SAT On Record" value="#{profileController.viewModel.SAT}" id="sat" class="form-control"/><br/>
-                                    Tagline<h:inputText p:placeHolder="Enter A Personal Tagline" value="#{profileController.viewModel.TAGLINE}" id="tagline" class="form-control"/><br/>
-                                    Picture <h:inputText p:placeHolder="Upload a picture, not yet implemented" value="#{profileController.viewModel.PICTURE}" id="pic" class="form-control"/><br/>
-                                    Material <h:inputText p:placeHolder="Upload material, not yet implemented" value="#{profileController.viewModel.MATERIAL}" id="Material" class="form-control"/><br/>
-                                    
+                                                <object width="420" height="315"
+                                                        data="#{profileController.viewModel.MATERIAL}">
+                                                </object>
+                                            </td>
+                                        </tr>
+                                    </table>
                                     <br/>
 
+
+                                    <h:commandButton id="messageStudent" value="Message Student" class="btn btn-primary" action="#{profileController.messageStudent()}"></h:commandButton>  &nbsp; &nbsp; &nbsp;
                                     <h:commandButton id="home" value="Go Home" class="btn btn-primary" action="#{profileController.goHome()}"></h:commandButton>  <br/>
 
 
